@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2022_11_10_185729) do
     t.string "email"
     t.datetime "check_out"
     t.datetime "check_in"
+    t.integer "museum_pass_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -5,6 +5,7 @@ class CreateReservations < ActiveRecord::Migration[6.1]
       t.string :email
       t.datetime :check_out
       t.datetime :check_in
+      t.integer :museum_pass_id
       t.timestamps
     end
   end
