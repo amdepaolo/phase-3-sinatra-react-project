@@ -19,8 +19,14 @@ class ApplicationController < Sinatra::Base
     pass.to_json(include: :reservations)
   end
   
-  # #create new pass: post
-
+  #create new pass: post
+  post "/passes" do
+    new_pass = MuseumPass.create(
+      name: params[:name],
+      website: params[:website]
+    )
+    new_pass.to_json
+  end
 
   #create reservation for pass: post
   #update and change date of reservation: patch
