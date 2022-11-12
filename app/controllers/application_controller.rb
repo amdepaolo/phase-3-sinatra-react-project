@@ -12,7 +12,6 @@ class ApplicationController < Sinatra::Base
     passes.to_json
   end
   
- 
   #read list of reservations per pass: get
   get "/passes/:id" do
     pass = MuseumPass.find(params[:id])
@@ -29,7 +28,18 @@ class ApplicationController < Sinatra::Base
   end
 
   #create reservation for pass: post
+  post "/passes/:id" do
+    pass = MuseumPass.find(params[:id])
+    pass.reserve(
+      name: params[:name],
+      email: params[:email],
+      check_out: params[:check_out]
+    )
+    pass.reservations.to_json
+  end
+
   #update and change date of reservation: patch
+  
   #delete reservation: delete
  
 
