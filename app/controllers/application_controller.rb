@@ -39,10 +39,22 @@ class ApplicationController < Sinatra::Base
   end
 
   #update and change date of reservation: patch
-  
+  patch "/reservations/:id" do
+    reservation = Reservation.find(params[:id])
+    reservation.update(
+      name: params[:name],
+      email: params[:email],
+      check_out: Date.parse(params[:check_out]),
+      check_in: Date.parse(params[:check_out]).next_day(2)
+    )
+    reservation.to_json
+  end
+
   #delete reservation: delete
- 
-
-
+  delete "/reservations/:id" do
+    reservation = Reservation.find(params[:id])
+    reservation.destroy
+    reservation.to_json
+  end
 
 end
