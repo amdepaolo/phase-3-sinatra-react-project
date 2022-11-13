@@ -10,4 +10,8 @@ class MuseumPass < ActiveRecord::Base
             museum_pass_id: self.id
         )
     end
+
+    def reservations_by_date
+        self.reservations.order(:check_out)
+    end
 end
