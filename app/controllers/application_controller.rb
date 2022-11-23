@@ -45,7 +45,7 @@ class ApplicationController < Sinatra::Base
       name: params[:name],
       email: params[:email],
       check_out: Date.parse(params[:check_out]),
-      check_in: Date.parse(params[:check_out]).next_day(2)
+      check_in: Date.parse(params[:check_in])
     )
     reservation.to_json
   end
