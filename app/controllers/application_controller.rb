@@ -30,24 +30,32 @@ class ApplicationController < Sinatra::Base
   #create reservation for pass: post
   post "/passes/:id" do
     pass = MuseumPass.find(params[:id])
-    pass.reserve(
-      name: params[:name],
-      email: params[:email],
-      check_out: params[:check_out]
-    )
-    pass.reservations.to_json
+    if pass.no_conflicts?(check_out:params[:check_out])
+      pass.reserve(
+        name: params[:name],
+        email: params[:email],
+        check_out: params[:check_out]
+      )
+      pass.reservations.to_json
+    else 
+      {error: "This reservation cannot be made as it conflicts with another reservation. Please check for other available dates"}.to_json
+    end
   end
 
   #update and change date of reservation: patch
   patch "/reservations/:id" do
     reservation = Reservation.find(params[:id])
-    reservation.update(
-      name: params[:name],
-      email: params[:email],
-      check_out: Date.parse(params[:check_out]),
-      check_in: Date.parse(params[:check_in])
-    )
-    reservation.to_json
+    if reservation.museum_pass.no_conflicts?(check_out: params[:check_out], check_in: params[:check_in])
+      reservation.update(
+        name: params[:name],
+        email: params[:email],
+        check_out: Date.parse(params[:check_out]),
+        check_in: Date.parse(params[:check_in])
+      )
+      reservation.to_json
+    else
+      {error: "This edit cannot be made as it would put the reservation in conflict with another reservation."}.to_json
+    end
   end
 
   #delete reservation: delete
