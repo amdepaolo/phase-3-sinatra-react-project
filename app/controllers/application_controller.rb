@@ -45,7 +45,7 @@ class ApplicationController < Sinatra::Base
   #update and change date of reservation: patch
   patch "/reservations/:id" do
     reservation = Reservation.find(params[:id])
-    if reservation.museum_pass.no_conflicts?(check_out: params[:check_out], check_in: params[:check_in])
+    if reservation.museum_pass.no_conflicts?(check_out: params[:check_out], check_in: params[:check_in], id: params[:id])
       reservation.update(
         name: params[:name],
         email: params[:email],
