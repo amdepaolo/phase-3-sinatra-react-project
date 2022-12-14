@@ -10,3 +10,11 @@ There are models for MuseumPasses and Reservations. The MuseumPass model has met
 The application manager handles Create and Read actions for the MuseumPass, and full CRUD actions for Reservations.
 
 This project has an associated repo that contains the front end.That repo can be [found here](https://github.com/amdepaolo/phase-3-project-front-end.git) 
+
+Info on gems used in this project:
+
+- [Active-Record](https://guides.rubyonrails.org/active_record_basics.html)
+
+- [Faker](https://github.com/faker-ruby/faker#default)
+
+- [Sinatra](https://rubydoc.info/gems/sinatra/Sinatra)
